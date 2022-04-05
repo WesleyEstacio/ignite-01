@@ -17,25 +17,33 @@ export function TaskList() {
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
 
-    if (!newTaskTitle) return
+    if(!newTaskTitle) return  
+    // Verifica se tem algo escrito no campo de ToDo
 
     const newTask = {
       id: Math.random(),
       title: newTaskTitle,
       isComplete: false
     }
+    //
 
-    setTasks(oldState => [...oldState, newTask])
-    setNewTaskTitle('')
+    setTasks(oldState => [...oldState, newTask]) 
+    //oldState = Pega todos os itens e "coloca em um novo array".
+    //newTask = Adiciona a nova task no array.
+
+    setNewTaskTitle('') 
+    // Deixa o campo vazio para nova task
   }
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
 
     const newTasks = tasks.map(task => task.id == id ? {
+      //Tasks.map - Vai verificar o ID se é o mesmo que foi selecionado e Sobrescrever o isComplete 
       ...task,
       isComplete: !task.isComplete
-    } : task)
+      //Sobrescreve o isComplete 
+    } : task) 
 
     setTasks(newTasks)
   }
@@ -44,8 +52,10 @@ export function TaskList() {
     // Remova uma task da listagem pelo ID
 
     const filteredTasks = tasks.filter(task => task.id != id)
+    //Filtra todas as tasks com o ID diferente da selecionada. 
 
     setTasks(filteredTasks)
+    //Mostra em tela apenas as tasks que não tiverem o mesmo ID da que esta sendo excluida.
   }
 
   return (
